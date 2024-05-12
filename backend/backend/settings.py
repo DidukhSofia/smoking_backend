@@ -25,11 +25,23 @@ SECRET_KEY = 'django-insecure-ldlvp3bhq(&4%y6a)sd%kub1!-%iyg)#_@wnfm-09rhei$5=be
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ["localhost","127.0.0.1"]
 CORS_ORIGIN_CREDENTIALS = True
-# Application definition
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://127.0.0.1:3000', 
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+)
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000', 
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,9 +53,11 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'rest_framework',
     'corsheaders',
+    'allauth',
 ]
 
 MIDDLEWARE = [
+    'allauth.account.middleware.AccountMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -108,9 +122,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # Аутентифікація за допомогою моделі користувача Django
+    'allauth.account.auth_backends.AuthenticationBackend',  # Підтримка різних механізмів аутентифікації через django-allauth
+)
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
+
 
 LANGUAGE_CODE = 'en-us'
 

@@ -1,18 +1,19 @@
 from django.urls import path
-from .views import ArticleAPIView, QuoteAPIView, RegisterView, LoginView, LogoutView, UserAPIView
+from .views import article_view, quote_view, register_view, login_view, logout_view, user_view, forger_password_view
 
 
 urlpatterns = [
-    path('register/', RegisterView.as_view()),
-    path('login/', LoginView.as_view()),
-    path('logout/', LogoutView.as_view()),
+    path('register/', register_view),
+    path('login/', login_view),
+    path('logout/', logout_view),
+    path('forget-password/', forger_password_view),
 
-    path('user/', UserAPIView.as_view()),
-    path('user/<int:id>/', UserAPIView.as_view()),
+    path('user/', user_view),
+    path('user/<int:id>/', user_view),
     
-    path('article/', ArticleAPIView.as_view(), name='article-list'),
-    path('article/<int:id>/', ArticleAPIView.as_view(), name='article-detail'),
+    path('article/', article_view, name='article-list'),
+    path('article/<int:id>/', article_view, name='article-detail'),
 
-    path('quote/', QuoteAPIView.as_view(), name='quote-list'),
-    path('quote/<int:id>/', QuoteAPIView.as_view(), name='quote-detail'),    
+    path('quote/', quote_view, name='quote-list'),
+    path('quote/<int:id>/', quote_view, name='quote-detail'),    
 ]
