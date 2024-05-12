@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import article_view, quote_view, register_view, login_view, logout_view, user_view, forger_password_view
+from .views import article_view, quote_view, register_view, login_view, logout_view, user_view, forger_password_view, increase_days_view
 
 
 urlpatterns = [
@@ -10,6 +10,8 @@ urlpatterns = [
 
     path('user/', user_view),
     path('user/<int:id>/', user_view),
+    path('increase/<int:id>/', increase_days_view, name='increase_days'),
+
     
     path('article/', article_view, name='article-list'),
     path('article/<int:id>/', article_view, name='article-detail'),

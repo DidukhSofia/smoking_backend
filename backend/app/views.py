@@ -1,4 +1,4 @@
-from .controllers.user_controller import UserAPIView
+from .controllers.user_controller import UserAPIView, IncreaseDaysAPIView
 from .controllers.article_controller import ArticleAPIView
 from .controllers.quote_controller import QuoteAPIView
 from .controllers.quote_controller import QuoteAPIView
@@ -16,3 +16,5 @@ forger_password_view = ForgetPasswordView.as_view()
 user_view = UserAPIView.as_view()
 article_view =  ArticleAPIView.as_view()
 quote_view = QuoteAPIView.as_view()
+
+increase_days_view = IncreaseDaysAPIView.as_view()
