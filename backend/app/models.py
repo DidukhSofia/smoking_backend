@@ -70,7 +70,3 @@ class Article(models.Model):
 class Quote(models.Model):
     quoteId = models.AutoField(primary_key=True)
     text = models.TextField()
-
-user = User.objects.create_user(email='user@example.com', password='password', startAmountOfCigarettes=10, priceOfPack=5, amountCigarettesInPack=20, progressDays=30)
-user.calculate_saved_cigarettes()
-user.calculate_saved_money()
