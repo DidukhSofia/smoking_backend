@@ -9,8 +9,6 @@ from rest_framework.exceptions import ParseError
 from django.http import HttpResponse
 
 
-
-
 from app.models import User 
 from app.serializers import UserSerializer
 
@@ -71,7 +69,7 @@ class IncreaseDaysAPIView(APIView):
             return HttpResponse('User not found', status=404)
 
         payload = {
-            'progressDays': user.progressDays + 1 # Change progressDays to 1
+            'progressDays': user.progressDays + 1
         }
         serializer = UserSerializer(user, data=payload, partial=True)
 
@@ -80,11 +78,8 @@ class IncreaseDaysAPIView(APIView):
             saved_cigarettes = user.calculate_saved_cigarettes()
             saved_money = user.calculate_saved_money()
 
-            return HttpResponse("Updated. Saved cigarettes: {}. Saved money: ${}.".format(saved_cigarettes, saved_money))
+            return Response({
+                "saved_cigarettes": saved_cigarettes,
+                "saved_money": saved_money
+            })
         return HttpResponse('Error in update: {}'.format(serializer.errors))
-
-
-
-
-
-
